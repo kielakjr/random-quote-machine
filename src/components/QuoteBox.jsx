@@ -21,6 +21,7 @@ const QuoteBox = () => {
     const fetchQuote = async () => {
         try {
             setLoading(true);
+            setError("");
             const response = await fetch(API_URL, API_OPTIONS);
             const data = await response.json();
             if (!response.ok) {
@@ -41,20 +42,28 @@ const QuoteBox = () => {
     }, []);
 
     return (
-    <div className="quote-box" id="quote-box">
-        {loading ? (
-            <p className='loading'>Loading...</p>
-        ) : error ? (
-            <p id="error">{error}</p>
-        ) : (
-            <>
-                <Quote text={quote} />
-                <Author name={author} />
-                <button id="new-quote" className='new-quote-btn' onClick={fetchQuote}>New Quote</button>
-            </>
-        )}
-    </div>
-  )
+        <div className={`quote-box ${loading ? 'loading' : ''}`} id="quote-box">
+            {loading ? (
+                <div className='loading-container'>
+                    <div className='spinner'></div>
+                    <p className='loading-text'>Loading quote...</p>
+                </div>
+            ) : error ? (
+                <div className='error-container'>
+                    <p className='error-text'>⚠️ {error}</p>
+                    <button onClick={fetchQuote} className='new-quote-btn'>Try Again</button>
+                </div>
+            ) : (
+                <>
+                    <Quote text={quote} />
+                    <Author name={author} />
+                    <button id="new-quote" className='new-quote-btn' onClick={fetchQuote}>
+                        New Quote
+                    </button>
+                </>
+            )}
+        </div>
+    )
 }
 
 export default QuoteBox
