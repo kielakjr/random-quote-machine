@@ -28,3 +28,10 @@ body {
     font-size: 2em;
     color: #444;
 }
+
+.author {
+    margin-top: 15px;
+    font-style: italic;
+    color: #666;
+    text-align: right;
+}

@@ -1,6 +1,8 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
+import Quote from './Quote';
+import Author from './Author';
 
 const API_URL = "https://api.quotable.io/random";
 const API_OPTIONS = {
@@ -12,12 +14,14 @@ const API_OPTIONS = {
 
 const QuoteBox = () => {
     const [quote, setQuote] = useState("");
+    const [author, setAuthor] = useState("");
 
     const fetchQuote = async () => {
         try {
             const response = await fetch(API_URL, API_OPTIONS);
             const data = await response.json();
             setQuote(data.content);
+            setAuthor(data.author);
         } catch (error) {
             console.error("Error fetching the quote: ", error);
         }
@@ -28,7 +32,11 @@ const QuoteBox = () => {
     }, []);
 
     return (
-    <div className="quote-box" id="quote-box">{quote}</div>
+    <div className="quote-box" id="quote-box">
+        <Quote text={quote} />
+        <br />
+        <Author name={author} />
+    </div>
   )
 }
 
