@@ -36,6 +36,7 @@ const QuoteBox = () => {
         <Quote text={quote} />
         <br />
         <Author name={author} />
+        <button id="new-quote" className="new-quote-btn" onClick={fetchQuote}>New Quote</button>
     </div>
   )
 }

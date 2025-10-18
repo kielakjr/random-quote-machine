@@ -35,3 +35,13 @@ body {
     color: #666;
     text-align: right;
 }
+
+.new-quote-btn {
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}

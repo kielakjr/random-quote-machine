@@ -2,7 +2,7 @@ import React from 'react'
 
 const Quote = ({ text }) => {
   return (
-    <div>" {text} "</div>
+    <div id="text">" {text} "</div>
   )
 }
 
