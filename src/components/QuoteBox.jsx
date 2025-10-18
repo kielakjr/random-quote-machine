@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import Quote from './Quote';
 import Author from './Author';
+import TwitterButton from './TwitterButton';
 
 const API_URL = "https://api.quotable.io/random";
 const API_OPTIONS = {
@@ -60,6 +61,7 @@ const QuoteBox = () => {
                     <button id="new-quote" className='new-quote-btn' onClick={fetchQuote}>
                         New Quote
                     </button>
+                    <TwitterButton quote={quote} author={author} />
                 </>
             )}
         </div>
