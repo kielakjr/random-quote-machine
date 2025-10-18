@@ -43,7 +43,7 @@ const QuoteBox = () => {
     return (
     <div className="quote-box" id="quote-box">
         {loading ? (
-            <p>Loading...</p>
+            <p className='loading'>Loading...</p>
         ) : error ? (
             <p id="error">{error}</p>
         ) : (
