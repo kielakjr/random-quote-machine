@@ -16,16 +16,21 @@ const QuoteBox = () => {
     const [quote, setQuote] = useState("");
     const [author, setAuthor] = useState("");
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
     const fetchQuote = async () => {
         try {
             setLoading(true);
             const response = await fetch(API_URL, API_OPTIONS);
             const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.message || "Failed to fetch quote");
+            }
             setQuote(data.content);
             setAuthor(data.author);
         } catch (error) {
             console.error("Error fetching the quote: ", error);
+            setError("Failed to fetch quote");
         } finally {
             setLoading(false);
         }
@@ -37,14 +42,17 @@ const QuoteBox = () => {
 
     return (
     <div className="quote-box" id="quote-box">
-        {loading ? <p>Loading...</p> : (
+        {loading ? (
+            <p>Loading...</p>
+        ) : error ? (
+            <p id="error">{error}</p>
+        ) : (
             <>
                 <Quote text={quote} />
-                <br />
                 <Author name={author} />
+                <button id="new-quote" className='new-quote-btn' onClick={fetchQuote}>New Quote</button>
             </>
         )}
-        <button id="new-quote" className="new-quote-btn" onClick={fetchQuote}>New Quote</button>
     </div>
   )
 }
